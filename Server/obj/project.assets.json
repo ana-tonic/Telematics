@@ -3689,11 +3689,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Projekat\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Server\\Server.csproj",
+      "projectPath": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Projekat\\Server\\Server.csproj",
       "packagesPath": "C:\\Users\\Ana\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Server\\obj\\",
+      "outputPath": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Projekat\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Ana\\AppData\\Roaming\\NuGet\\NuGet.Config",
