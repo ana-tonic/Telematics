@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -30,7 +28,7 @@ namespace Server.Controllers
         {
             var rng = new Random();
             AstraService a = new AstraService();
-            var r = a.Session.Execute("select * from test.movies");
+            var r = a.Session.Execute("select * from telematics.movies_and_tv");
             return r.First().GetValue<string>("title");
         }
     }

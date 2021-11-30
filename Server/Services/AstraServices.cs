@@ -18,7 +18,7 @@ namespace Server.Services
                 {
                     _session = Cluster.Builder()
                                             .WithCloudSecureConnectionBundle("secure-connect-test.zip")
-                                            .WithCredentials("gISIwpTraUOfWMJTrPWDcoxJ", "SPHmw3TDSXoENZ,87krwuG_0QSvRoSqZacUl9uhwPtmK5+fYnwwW4nzBLM0QDGt77LZ1vhQJpH.Q8PfqM5+Y6i9dS1SUXZ,lfLQOqUCNKJuuRM6FhCPn.Ho5rB-zC9cB")
+                                            .WithCredentials("wvXCpORCjsTiGndYoaeeXApJ", "UmZSGivTw5kS91N4jNQzixCvR2vGwLKyQAyX9f8x1emB,f9BtEzlfZA-c5+1L,wzOJdMF6jgbEdInIdzg1zclLsst6hMDeeov7Zb_M,FZS8v+J.MOCmH4-g__9vZW_aj")
                                             .Build()
                                             .Connect();
                 }

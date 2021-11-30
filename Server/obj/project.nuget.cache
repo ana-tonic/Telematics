@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yP/wwQKIQL/NxVELUifyxA+MmEzkP3TcaZrjJGmZc8F268gis9sGJUZTxzPzwnKt1PkflfyMWdsFFUVTq2b1JQ==",
+  "dgSpecHash": "ULPstiuQbJACzp5LHOx+H0GviNnzJ1RUEYSzNbjXYHxoMUwMUWNeawsQVEK9G+bS3cH4anfUOivg58T6m3ycSg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Projekat\\Server\\Server.csproj",
+  "projectFilePath": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Telematics\\Server\\Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ana\\.nuget\\packages\\cassandracsharpdriver\\3.17.1\\cassandracsharpdriver.3.17.1.nupkg.sha512",
     "C:\\Users\\Ana\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",

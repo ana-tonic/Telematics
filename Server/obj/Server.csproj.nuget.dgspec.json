@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Projekat\\Server\\Server.csproj": {}
+    "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Telematics\\Server\\Server.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Projekat\\Server\\Server.csproj": {
+    "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Telematics\\Server\\Server.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Projekat\\Server\\Server.csproj",
+        "projectUniqueName": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Telematics\\Server\\Server.csproj",
         "projectName": "Server",
-        "projectPath": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Projekat\\Server\\Server.csproj",
+        "projectPath": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Telematics\\Server\\Server.csproj",
         "packagesPath": "C:\\Users\\Ana\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Projekat\\Server\\obj\\",
+        "outputPath": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Telematics\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Ana\\AppData\\Roaming\\NuGet\\NuGet.Config",
