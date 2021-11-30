@@ -9,16 +9,15 @@ namespace Server.Services
 {
     public class DataProvider
     {
-        private IDataStaxService Service { get; set; }
+        private static IDataStaxService Service { get; set; }
 
 
 
         #region Deliveries
-        public static getAllDeliveries()
+        public static string getAllDeliveries()
         {
-            Services
+            return Service.Session.Execute("select * from telematics.movies_and_tv").First().GetValue<string>("title");
         }
-
 
         #endregion
     }
