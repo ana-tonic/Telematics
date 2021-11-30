@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Server",
+    "\\Server\\Controllers",
+    "\\Server\\Interfaces",
+    "\\Server\\Services"
+  ],
+  "SelectedNode": "\\Server\\Server.csproj",
+  "PreviewInSolutionExplorer": false
+}
