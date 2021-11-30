@@ -13,13 +13,18 @@ namespace Server.Controllers
     [Route("[controller]")]
     public class DeliveriesController : ControllerBase
     {
+        public DataProvider data { get; set; }
 
+        public DeliveriesController()
+        {
+            data = new DataProvider();
+        }
 
         [HttpGet]
         [Route("GetAllDeliveries")]
         public string GetAllDeliveries()
         {
-            return DataProvider.getAllDeliveries();
+            return data.getAllDeliveries();
         }
     }
 }
