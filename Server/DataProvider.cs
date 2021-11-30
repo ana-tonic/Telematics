@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Server.
+using Server;
 
 namespace Server.Services
 {
@@ -15,7 +15,7 @@ namespace Server.Services
         #region Deliveries
         public static getAllDeliveries()
         {
-            Services.
+          //  Deliveries 
         }
 
 
