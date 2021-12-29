@@ -1,0 +1,11 @@
+
+.vs/slnx.sqlite
+Server/bin/Debug/net5.0/Cassandra.dll
+Server/bin/Debug/net5.0/Microsoft.OpenApi.dll
+Server/bin/Debug/net5.0/Newtonsoft.Json.dll
+Server/bin/Debug/net5.0/Server.dll
+Server/bin/Debug/net5.0/Server.exe
+Server/bin/Debug/net5.0/Server.pdb
+Server/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll
+Server/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll
+Server/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll
