@@ -4,8 +4,9 @@
     "\\Server",
     "\\Server\\Controllers",
     "\\Server\\Interfaces",
+    "\\Server\\Models",
     "\\Server\\Services"
   ],
-  "SelectedNode": "\\Server\\Server.csproj",
+  "SelectedNode": "\\Server\\Models\\Deliveries.cs",
   "PreviewInSolutionExplorer": false
 }
