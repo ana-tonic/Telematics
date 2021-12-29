@@ -31,9 +31,9 @@ namespace Server.Controllers
         [Route("CreateDelivery")]
         //[ProducesResponseType(StatusCodes.Status200OK)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult CreateDelivery()
+        public IActionResult CreateDelivery([FromBody] Deliveries d)
         {
-            data.CreateDelivery();
+            data.CreateDelivery(d);
             return Ok();
         }
     }
