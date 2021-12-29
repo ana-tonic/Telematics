@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Server;
 using Server.Interfaces;
 using Cassandra;
+using Server.Models;
 
 namespace Server.Services
 {
@@ -21,6 +22,31 @@ namespace Server.Services
         public string getAllDeliveries()
         {
             return Session.Execute("select * from telematics.movies_and_tv").First().GetValue<string>("title");
+        }
+
+        public void CreateDelivery()
+        {
+            /*Deliveries delivery = new Deliveries
+            {
+                Active = d.Active,
+                Arrival_Time = d.Arrival_Time,
+                Cargo = d.Cargo,
+                Delivery_Id = d.Delivery_Id,
+                Departing_Time = d.Departing_Time,
+                Driver = d.Driver,
+                End_Address = d.End_Address,
+                Start_Address = d.Start_Address,
+                Truck_Id = d.Truck_Id,
+                Year = d.Year,
+            };*/
+            
+            var a = Cassandra.TimeUuid.NewId();
+            var b = Cassandra.TimeUuid.NewId();
+
+            RowSet del = Session.Execute("insert into telematics.Deliveries (cargo, year, active, departing_time, delivery_id, arrival_time, driver, end_address, start_address, truck_id) values ('adfs', 1312, True, '2021-12-29T13:56:00.176Z', " + a + ", '2022-12-29T13:56:00.176Z', 'asda', '123', '123'," + b + ")");
+                //+ $" values ({delivery.Cargo}, {delivery.Year}, {delivery.Active}, {delivery.Departing_Time}, {delivery.Delivery_Id}, {delivery.Arrival_Time}, {delivery.Driver}, " + 
+                //$"{delivery.End_Address}, {delivery.Start_Address}, {delivery.Truck_Id})");
+
         }
 
         #endregion

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eBAWze+YlTbYRxznCaMhUbl4SzL/6j+eJcQsPaXDEg06drAs/EJplalnxjxRElKpVtS+y1675+BoBjDZd/BvIg==",
+  "dgSpecHash": "tQE0rrXg7ddkJTLbcGWb4efreZueR97usZgMI3+aw8HQU5HscH+OPxc104qomVDeBMEXYmR9cHNzL0zwxcTsfQ==",
   "success": true,
-  "projectFilePath": "E:\\Napredne baze\\Telematics\\Server\\Server.csproj",
+  "projectFilePath": "C:\\Users\\Aca\\source\\repos\\Telematics\\Server\\Server.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aca\\.nuget\\packages\\cassandracsharpdriver\\3.17.1\\cassandracsharpdriver.3.17.1.nupkg.sha512",
     "C:\\Users\\Aca\\.nuget\\packages\\k4os.compression.lz4\\1.1.11\\k4os.compression.lz4.1.1.11.nupkg.sha512",

@@ -3684,24 +3684,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Aca\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\Aca\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Napredne baze\\Telematics\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\Aca\\source\\repos\\Telematics\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "E:\\Napredne baze\\Telematics\\Server\\Server.csproj",
+      "projectPath": "C:\\Users\\Aca\\source\\repos\\Telematics\\Server\\Server.csproj",
       "packagesPath": "C:\\Users\\Aca\\.nuget\\packages\\",
-      "outputPath": "E:\\Napredne baze\\Telematics\\Server\\obj\\",
+      "outputPath": "C:\\Users\\Aca\\source\\repos\\Telematics\\Server\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
         "C:\\Users\\Aca\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3754,7 +3749,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

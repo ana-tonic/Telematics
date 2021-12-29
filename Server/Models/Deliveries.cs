@@ -9,6 +9,7 @@ namespace Server.Models
         public string Driver { get; set; }
         public string Start_Address { get; set; }
         public string End_Address { get; set; }
+        public int Year { get; set; }
         public DateTimeOffset Departing_Time { get; set; }
         public DateTimeOffset Arrival_Time { get; set; }
         public string Cargo { get; set; }

@@ -22,9 +22,19 @@ namespace Server.Controllers
 
         [HttpGet]
         [Route("GetAllDeliveries")]
-        public string GetAllDeliveries()
+        public IActionResult GetAllDeliveries()
         {
-            return data.getAllDeliveries();
+            return new JsonResult(data.getAllDeliveries());
+        }
+
+        [HttpPost]
+        [Route("CreateDelivery")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult CreateDelivery()
+        {
+            data.CreateDelivery();
+            return Ok();
         }
     }
 }
