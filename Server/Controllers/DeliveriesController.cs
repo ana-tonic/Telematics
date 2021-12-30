@@ -9,6 +9,8 @@ using Server.Services;
 
 namespace Server.Controllers
 {
+    #region Deliveries
+
     [ApiController]
     [Route("[controller]")]
     public class DeliveriesController : ControllerBase
@@ -44,5 +46,40 @@ namespace Server.Controllers
             data.CreateDelivery(d);
             return Ok();
         }
+
+        #endregion Deliveries
+
+        #region speed
+
+        [HttpGet]
+        [Route("GetFuel/{delivery_id}")]
+        public IActionResult GetFuel(Cassandra.TimeUuid delivery_id)
+        {
+            return new JsonResult(data.getFuel(delivery_id));
+        }
+
+
+        [HttpGet]
+        [Route("GetLocation/{delivery_id}")]
+        public IActionResult GetLocation(Cassandra.TimeUuid delivery_id)
+        {
+            return new JsonResult(data.GetLocation(delivery_id));
+        }
+
+        [HttpGet]
+        [Route("GetSpeed/{delivery_id}")]
+        public IActionResult GetSpeed(Cassandra.TimeUuid delivery_id)
+        {
+            return new JsonResult(data.GetSpeed(delivery_id));
+        }
+
+        [HttpGet]
+        [Route("GetIdling/{delivery_id}")]
+        public IActionResult GetIdling(Cassandra.TimeUuid delivery_id)
+        {
+            return new JsonResult(data.GetIdling(delivery_id));
+        }
+
+        #endregion
     }
 }

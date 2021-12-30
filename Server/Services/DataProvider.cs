@@ -11,7 +11,7 @@ namespace Server.Services
 {
     public class DataProvider
     {
-        private  ISession Session { get; set; }
+        private ISession Session { get; set; }
 
         public DataProvider()
         {
@@ -45,10 +45,30 @@ namespace Server.Services
                 Year = d.Year,
             };
 
-            RowSet del = Session.Execute("insert into telematics.Deliveries (cargo, year, active, departing_time, delivery_id, arrival_time, driver, end_address, start_address, truck_id)" 
+            RowSet del = Session.Execute("insert into telematics.Deliveries (cargo, year, active, departing_time, delivery_id, arrival_time, driver, end_address, start_address, truck_id)"
                 + $" values ('{delivery.Cargo}', {delivery.Year}, {delivery.Active}, '{delivery.Departing_Time.ToUnixTimeMilliseconds()}', {delivery.Delivery_Id}, '{delivery.Arrival_Time.ToUnixTimeMilliseconds()}', '{delivery.Driver}', " +
                 $"'{delivery.End_Address}', '{delivery.Start_Address}', {delivery.Truck_Id})");
 
+        }
+
+        public RowSet getFuel(Cassandra.TimeUuid delivery_id)
+        {
+            return Session.Execute($"SELECT * FROM telematics.fuel WHERE delivery_id = {delivery_id} ");
+        }
+
+        public RowSet getLocation(Cassandra.TimeUuid delivery_id)
+        {
+            return Session.Execute($"SELECT * FROM telematics.location WHERE delivery_id = {delivery_id} ");
+        }
+
+        public RowSet getSpeed(Cassandra.TimeUuid delivery_id)
+        {
+            return Session.Execute($"SELECT * FROM telematics.speed WHERE delivery_id = {delivery_id} ");
+        }
+
+        public RowSet getIdling(Cassandra.TimeUuid delivery_id)
+        {
+            return Session.Execute($"SELECT * FROM telematics.idling WHERE delivery_id = {delivery_id} ");
         }
 
         #endregion
