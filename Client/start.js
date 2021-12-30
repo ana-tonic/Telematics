@@ -40,7 +40,7 @@ export class Start {
         host.appendChild(table);
     }
 
-    drawHeader(table) {
+    drawDeliveryHeader(table) {
         const header = document.createElement("tr");
 
         table.appendChild(header);
@@ -79,6 +79,47 @@ export class Start {
         const truck_id = document.createElement("th");
         truck_id.innerHTML = "Truck";
         header.appendChild(truck_id);
+    }
+
+    drawDeliveryData(table, delivery) {
+        const row = document.createElement("tr");
+        table.appendChild(row);
+
+        const cargo = document.createElement("td");
+        cargo.innerHTML = delivery.cargo;
+        row.appendChild(cargo);
+
+        const year = document.createElement("td");
+        year.innerHTML = delivery.year;
+        row.appendChild(year);
+
+        const active = document.createElement("td");
+        active.innerHTML = delivery.active;
+        row.appendChild(active);
+
+        const departing_time = document.createElement("td");
+        departing_time.innerHTML = delivery.departing_time;
+        row.appendChild(departing_time);
+
+        const arrival_time = document.createElement("td");
+        arrival_time.innerHTML = delivery.arrival_time;
+        row.appendChild(arrival_time);
+
+        const driver = document.createElement("td");
+        driver.innerHTML = delivery.driver;
+        row.appendChild(driver);
+
+        const startAddress = document.createElement("td");
+        startAddress.innerHTML = delivery.start_address;
+        row.appendChild(startAddress);
+
+        const endAddress = document.createElement("td");
+        endAddress.innerHTML = delivery.end_address;
+        row.appendChild(endAddress);
+
+        const truck_id = document.createElement("td");
+        truck_id.innerHTML = delivery.truck_id;
+        row.appendChild(truck_id);
     }
 
     drawLeft(host) {
@@ -125,7 +166,7 @@ export class Start {
                 parent = this.middleTable.parentNode;
                 parent.removeChild(this.middleTable);
                 this.drawMiddle(parent);
-                this.drawHeader(this.middleTable);
+                this.drawDeliveryHeader(this.middleTable);
 
                 p.json().then(deliveries => {
 
@@ -135,7 +176,7 @@ export class Start {
                             delivery[4], delivery[5], delivery[6], delivery[7], delivery[8], delivery[9]);
 
                         console.log(del);
-                        //del.crtajVrt(document.body);
+                        this.drawDeliveryData(this.middleTable, del);
                     });
 
                 });

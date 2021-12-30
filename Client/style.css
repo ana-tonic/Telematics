@@ -74,7 +74,7 @@ body{
     width: 70%;
 }
 
-th, tr, table{
+th, tr, td, table{
 
     border-collapse: collapse;
     border: 1px solid black;
