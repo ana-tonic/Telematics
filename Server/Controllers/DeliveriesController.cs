@@ -27,12 +27,20 @@ namespace Server.Controllers
             return new JsonResult(data.getAllDeliveries());
         }
 
+        [HttpGet]
+        [Route("GetDeliveries/{cargo}&{year}")]
+        public IActionResult GetDeliveries(string cargo, int year)
+        {
+            return new JsonResult(data.getDeliveries(cargo, year));
+        }
+
         [HttpPost]
         [Route("CreateDelivery")]
         //[ProducesResponseType(StatusCodes.Status200OK)]
         //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult CreateDelivery([FromBody] Deliveries d)
         {
+
             data.CreateDelivery(d);
             return Ok();
         }

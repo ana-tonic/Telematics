@@ -24,6 +24,11 @@ namespace Server.Services
             return Session.Execute("select * from telematics.movies_and_tv").First().GetValue<string>("title");
         }
 
+        public RowSet getDeliveries(string cargo, int year)
+        {
+            return Session.Execute($"SELECT * FROM telematics.deliveries WHERE cargo = '{cargo}' and year = {year}");
+        }
+
         public void CreateDelivery(Deliveries d)
         {
             Deliveries delivery = new Deliveries
@@ -40,7 +45,7 @@ namespace Server.Services
                 Year = d.Year,
             };
 
-            RowSet del = Session.Execute("insert into telematics.Deliveries (cargo, year, active, departing_time, delivery_id, arrival_time, driver, end_address, start_address, truck_id)"
+            RowSet del = Session.Execute("insert into telematics.Deliveries (cargo, year, active, departing_time, delivery_id, arrival_time, driver, end_address, start_address, truck_id)" 
                 + $" values ('{delivery.Cargo}', {delivery.Year}, {delivery.Active}, '{delivery.Departing_Time.ToUnixTimeMilliseconds()}', {delivery.Delivery_Id}, '{delivery.Arrival_Time.ToUnixTimeMilliseconds()}', '{delivery.Driver}', " +
                 $"'{delivery.End_Address}', '{delivery.Start_Address}', {delivery.Truck_Id})");
 
