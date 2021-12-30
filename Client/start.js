@@ -1,6 +1,9 @@
+import { Delivery } from "./delivery.js";
+
 export class Start {
     constructor() {
         this.container = null;
+        this.middleTable = null;
     }
 
     draw(host) {
@@ -15,12 +18,67 @@ export class Start {
         leftStart.className = "leftStart";
         this.container.appendChild(leftStart);
 
+        const tableDiv = document.createElement("div");
+        tableDiv.className = "tableDiv";
+        this.container.appendChild(tableDiv);
+
+        this.drawMiddle(tableDiv);
+
         const rightStart = document.createElement("img");
         rightStart.className = "rightStart";
         rightStart.src = "Truck.png";
         this.container.appendChild(rightStart);
 
         this.drawLeft(leftStart);
+    }
+
+    drawMiddle(host) {
+
+        let table = document.createElement("table");
+        this.middleTable = table;
+        table.className = "table";
+        host.appendChild(table);
+    }
+
+    drawHeader(table) {
+        const header = document.createElement("tr");
+
+        table.appendChild(header);
+        const cargo = document.createElement("th");
+        cargo.innerHTML = "Cargo";
+        header.appendChild(cargo);
+
+        const year = document.createElement("th");
+        year.innerHTML = "Year";
+        header.appendChild(year);
+
+        const active = document.createElement("th");
+        active.innerHTML = "Active";
+        header.appendChild(active);
+
+        const departing_time = document.createElement("th");
+        departing_time.innerHTML = "Departing time";
+        header.appendChild(departing_time);
+
+        const arrival_time = document.createElement("th");
+        arrival_time.innerHTML = "Arrival time";
+        header.appendChild(arrival_time);
+
+        const driver = document.createElement("th");
+        driver.innerHTML = "Driver";
+        header.appendChild(driver);
+
+        const startAddress = document.createElement("th");
+        startAddress.innerHTML = "Start address";
+        header.appendChild(startAddress);
+
+        const endAddress = document.createElement("th");
+        endAddress.innerHTML = "End address";
+        header.appendChild(endAddress);
+
+        const truck_id = document.createElement("th");
+        truck_id.innerHTML = "Truck";
+        header.appendChild(truck_id);
     }
 
     drawLeft(host) {
@@ -62,7 +120,27 @@ export class Start {
         showDelivery.onclick = () => {
             const cargo = this.container.querySelector(".cargoSelect").value;
             const year = this.container.querySelector(".year").value;
-            console.log(year);
+            fetch(`https://localhost:5001/Deliveries/GetDeliveries/${cargo}&${year}`).then(p => {
+
+                parent = this.middleTable.parentNode;
+                parent.removeChild(this.middleTable);
+                this.drawMiddle(parent);
+                this.drawHeader(this.middleTable);
+
+                p.json().then(deliveries => {
+
+                    deliveries.forEach(delivery => {
+
+                        const del = new Delivery(delivery[0], delivery[1], delivery[2], delivery[3],
+                            delivery[4], delivery[5], delivery[6], delivery[7], delivery[8], delivery[9]);
+
+                        console.log(del);
+                        //del.crtajVrt(document.body);
+                    });
+
+                });
+
+            });
         }
         showDelivery.innerHTML = "Show deliveries";
     }
@@ -158,7 +236,7 @@ export class Start {
         year.type = "number";
         year.value = new Date().getFullYear();
         year.min = 2000;
-        year.max = 2040;
+        year.max = new Date().getFullYear();;
         year.className = "year select";
         y.appendChild(year);
     }
