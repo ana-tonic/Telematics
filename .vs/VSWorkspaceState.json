@@ -7,6 +7,6 @@
     "\\Server\\Models",
     "\\Server\\Services"
   ],
-  "SelectedNode": "\\Server\\Models\\Deliveries.cs",
+  "SelectedNode": "\\Server\\Controllers\\DeliveriesController.cs",
   "PreviewInSolutionExplorer": false
 }
