@@ -45,7 +45,7 @@ namespace Server.Services
                 Year = d.Year,
             };
 
-            RowSet del = Session.Execute("insert into telematics.Deliveries (cargo, year, active, departing_time, delivery_id, arrival_time, driver, end_address, start_address, truck_id)"
+            Session.Execute("insert into telematics.Deliveries (cargo, year, active, departing_time, delivery_id, arrival_time, driver, end_address, start_address, truck_id)"
                 + $" values ('{delivery.Cargo}', {delivery.Year}, {delivery.Active}, '{delivery.Departing_Time.ToUnixTimeMilliseconds()}', {delivery.Delivery_Id}, '{delivery.Arrival_Time.ToUnixTimeMilliseconds()}', '{delivery.Driver}', " +
                 $"'{delivery.End_Address}', '{delivery.Start_Address}', {delivery.Truck_Id})");
 
@@ -54,6 +54,12 @@ namespace Server.Services
         public RowSet getFuel(Cassandra.TimeUuid delivery_id)
         {
             return Session.Execute($"SELECT * FROM telematics.fuel WHERE delivery_id = {delivery_id} ");
+        }
+
+        public void CreateFuel(Cassandra.TimeUuid delivery_id)
+        {
+            Session.Execute("insert into telematics.fuel (delivery_id, Reading_Time, fuel, truck_id, Unit)"
+                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, 100, 'l')");
         }
 
         public RowSet getLocation(Cassandra.TimeUuid delivery_id)

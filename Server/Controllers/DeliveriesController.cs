@@ -38,8 +38,6 @@ namespace Server.Controllers
 
         [HttpPost]
         [Route("CreateDelivery")]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult CreateDelivery([FromBody] Deliveries d)
         {
 
@@ -49,37 +47,57 @@ namespace Server.Controllers
 
         #endregion Deliveries
 
-        #region speed
+        #region fuel
 
         [HttpGet]
         [Route("GetFuel/{delivery_id}")]
-        public IActionResult GetFuel(Cassandra.TimeUuid delivery_id)
+        public IActionResult GetFuel(string delivery_id)
         {
-            return new JsonResult(data.getFuel(delivery_id));
+            return new JsonResult(data.getFuel(Guid.Parse(delivery_id)));
         }
 
+        [HttpPost]
+        [Route("CreateFuel/{delivery_id}")]
+        public IActionResult CreateFuel(string delivery_id)
+        {
+            data.CreateFuel(Guid.Parse(delivery_id));
+            return Ok();
+        }
+
+        #endregion
+
+        #region location
 
         [HttpGet]
         [Route("GetLocation/{delivery_id}")]
         public IActionResult GetLocation(Cassandra.TimeUuid delivery_id)
         {
-            return new JsonResult(data.GetLocation(delivery_id));
+            return new JsonResult(data.getLocation(delivery_id));
         }
+
+        #endregion
+
+        #region speed
 
         [HttpGet]
         [Route("GetSpeed/{delivery_id}")]
         public IActionResult GetSpeed(Cassandra.TimeUuid delivery_id)
         {
-            return new JsonResult(data.GetSpeed(delivery_id));
+            return new JsonResult(data.getSpeed(delivery_id));
         }
+
+        #endregion
+
+        #region idling
 
         [HttpGet]
         [Route("GetIdling/{delivery_id}")]
         public IActionResult GetIdling(Cassandra.TimeUuid delivery_id)
         {
-            return new JsonResult(data.GetIdling(delivery_id));
+            return new JsonResult(data.getIdling(delivery_id));
         }
 
         #endregion
+
     }
 }

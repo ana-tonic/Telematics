@@ -3684,19 +3684,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ana\\.nuget\\packages\\": {}
+    "C:\\Users\\Aca\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Telematics\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\Aca\\source\\repos\\Telematics\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Telematics\\Server\\Server.csproj",
-      "packagesPath": "C:\\Users\\Ana\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ana\\Desktop\\7semestar\\napredne baze podataka\\Cassandra\\Telematics\\Server\\obj\\",
+      "projectPath": "C:\\Users\\Aca\\source\\repos\\Telematics\\Server\\Server.csproj",
+      "packagesPath": "C:\\Users\\Aca\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Aca\\source\\repos\\Telematics\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Ana\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Aca\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3749,7 +3749,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

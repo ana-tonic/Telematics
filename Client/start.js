@@ -4,6 +4,7 @@ export class Start {
     constructor() {
         this.container = null;
         this.middleTable = null;
+        this.rightTable = null;
     }
 
     draw(host) {
@@ -24,12 +25,123 @@ export class Start {
 
         this.drawMiddle(tableDiv);
 
+        const rightTableDiv = document.createElement("div");
+        this.container.appendChild(rightTableDiv);
+
+        this.drawRightTable(rightTableDiv);
+
+        this.drawIMG(this.container);
+
+        this.drawLeft(leftStart);
+    }
+
+    drawIMG(host) {
         const rightStart = document.createElement("img");
         rightStart.className = "rightStart";
         rightStart.src = "Truck.png";
-        this.container.appendChild(rightStart);
+        host.appendChild(rightStart);
+    }
 
-        this.drawLeft(leftStart);
+    drawRightTable(host) {
+
+        const tableDiv = document.createElement("div");
+        this.rightTable = tableDiv;
+        tableDiv.className = "rightTableDiv";
+        host.appendChild(tableDiv);
+    }
+
+    drawRightTableButtons(host, delivery_id) {
+        const buttonsDiv = document.createElement("div");
+        buttonsDiv.className = "buttonsDiv";
+        host.appendChild(buttonsDiv);
+
+        const h1 = ["Truck", "Fuel", "Unit", "Reading time"];
+        const h2 = ["Truck", "Time Idle", "Unit", "Reading time"];
+        const h3 = ["Truck", "Speed", "Unit", "Reading time"];
+        const h4 = ["Truck", "Location", "Distance", "Reading time"];
+
+        const buttonFuel = document.createElement("button");
+        buttonFuel.className = "rightButton";
+        buttonFuel.innerHTML = "Fuel";
+        buttonFuel.onclick = () => {
+            console.log(delivery_id);
+        }
+        buttonsDiv.appendChild(buttonFuel);
+
+        const buttonIdling = document.createElement("button");
+        buttonIdling.className = "rightButton";
+        buttonIdling.innerHTML = "Idling time";
+        buttonIdling.onclick = () => {
+            console.log("Idling");
+        }
+        buttonsDiv.appendChild(buttonIdling);
+
+        const buttonSpeed = document.createElement("button");
+        buttonSpeed.className = "rightButton";
+        buttonSpeed.innerHTML = "Speed";
+        buttonSpeed.onclick = () => {
+            console.log("Speed");
+        }
+        buttonsDiv.appendChild(buttonSpeed);
+
+        const buttonLocation = document.createElement("button");
+        buttonLocation.className = "rightButton";
+        buttonLocation.innerHTML = "Location";
+        buttonLocation.onclick = () => {
+            console.log("FuLocationel");
+        }
+        buttonsDiv.appendChild(buttonLocation);
+
+        fetch(`https://localhost:5001/Deliveries/GetFuel/${delivery_id}`).then(p => {
+            p.json().then(data => {
+
+                this.drawRightTableContent(host, data, h1);
+            });
+
+        });
+
+    }
+
+    drawRightTableContent(host, data, h) {
+        let table = document.createElement("table");
+        table.className = "table";
+        host.appendChild(table);
+
+
+        const header = document.createElement("tr");
+        table.appendChild(header);
+
+        h.forEach(hName => {
+            const c = document.createElement("th");
+            c.innerHTML = hName;
+            header.appendChild(c);
+        });
+
+        data.forEach(row => {
+            const r = document.createElement("tr");
+            table.appendChild(r);
+
+            console.log(row);
+            const c1 = document.createElement("td");
+            c1.innerHTML = row[3];
+            r.appendChild(c1);
+
+            const c2 = document.createElement("td");
+            c2.innerHTML = row[2];
+            r.appendChild(c2);
+
+            const c3 = document.createElement("td");
+            c3.innerHTML = row[4];
+            r.appendChild(c3);
+
+            const t = new Date(row[1]);
+            const tf = t.getDate() + "-" + (t.getMonth() + 1) + "-" + t.getFullYear() + " " +
+                t.getHours() + ":" + t.getMinutes() + ":" + t.getSeconds();
+
+            const c4 = document.createElement("td");
+            c4.innerHTML = tf;
+            r.appendChild(c4);
+        });
     }
 
     drawMiddle(host) {
@@ -42,8 +154,8 @@ export class Start {
 
     drawDeliveryHeader(table) {
         const header = document.createElement("tr");
-
         table.appendChild(header);
+
         const cargo = document.createElement("th");
         cargo.innerHTML = "Cargo";
         header.appendChild(cargo);
@@ -82,8 +194,32 @@ export class Start {
     }
 
     drawDeliveryData(table, delivery) {
+        const arrival = new Date(delivery.arrival_time);
+        const departing = new Date(delivery.departing_time);
+
+        const arrivalFormated = arrival.getDate() + "-" + (arrival.getMonth() + 1) + "-" + arrival.getFullYear() + " " +
+            arrival.getHours() + ":" + arrival.getMinutes();
+
+        const departingFormated = departing.getDate() + "-" + (departing.getMonth() + 1) + "-" + departing.getFullYear() + " " +
+            departing.getHours() + ":" + departing.getMinutes();
+
         const row = document.createElement("tr");
         table.appendChild(row);
+        row.onclick = () => {
+            let img = this.container.querySelector("img");
+            if (img != null) {
+                this.container.removeChild(img);
+                this.drawIMG(document.body);
+            }
+
+            console.log(delivery.delivery_id);
+
+            const par = this.rightTable.parentNode;
+            par.removeChild(this.rightTable)
+            this.drawRightTable(par);
+            this.drawRightTableButtons(this.rightTable, delivery.delivery_id);
+
+        };
 
         const cargo = document.createElement("td");
         cargo.innerHTML = delivery.cargo;
@@ -98,11 +234,11 @@ export class Start {
         row.appendChild(active);
 
         const departing_time = document.createElement("td");
-        departing_time.innerHTML = delivery.departing_time;
+        departing_time.innerHTML = departingFormated;
         row.appendChild(departing_time);
 
         const arrival_time = document.createElement("td");
-        arrival_time.innerHTML = delivery.arrival_time;
+        arrival_time.innerHTML = arrivalFormated;
         row.appendChild(arrival_time);
 
         const driver = document.createElement("td");
@@ -175,7 +311,6 @@ export class Start {
                         const del = new Delivery(delivery[0], delivery[1], delivery[2], delivery[3],
                             delivery[4], delivery[5], delivery[6], delivery[7], delivery[8], delivery[9]);
 
-                        console.log(del);
                         this.drawDeliveryData(this.middleTable, del);
                     });
 

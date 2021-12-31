@@ -26,6 +26,7 @@
 .rightStart {
   width: 50%;
   height: auto;
+  align-self: end;
 }
 
 body {
@@ -37,12 +38,14 @@ body {
 .elContainer {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .DFinput {
   display: flex;
   width: 60%;
-  margin-bottom: 10px;
+  height: min-content;
+  align-self: center;
 }
 
 .DF {
@@ -68,6 +71,7 @@ body {
   margin-left: 15px;
   margin-right: 15px;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 
 .select {
@@ -85,4 +89,9 @@ table {
 th {
   padding-left: 5px;
   padding-right: 5px;
+}
+
+.buttonsDiv{
+  display: flex;
+  justify-content: space-around;
 }
