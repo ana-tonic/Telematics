@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Cassandra;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Server.Models;
@@ -70,9 +71,24 @@ namespace Server.Controllers
 
         [HttpGet]
         [Route("GetLocation/{delivery_id}")]
-        public IActionResult GetLocation(Cassandra.TimeUuid delivery_id)
+        public IActionResult GetLocation(string delivery_id)
         {
-            return new JsonResult(data.getLocation(delivery_id));
+            //return new JsonResult(data.getLocation(Guid.Parse(delivery_id)));
+            RowSet rows = data.getLocation(Guid.Parse(delivery_id));
+            foreach (Row row in rows)
+            {
+                var loc = row.GetValue <location>("location");
+                System.Console.WriteLine(loc.latitude.ToString() +" "+ loc.longitude.ToString());
+            }
+            return new JsonResult(rows);
+        }
+
+        [HttpPost]
+        [Route("CreateLocation/{delivery_id}")]
+        public IActionResult CreateLocation(string delivery_id)
+        {
+            data.CreateLocation(Guid.Parse(delivery_id));
+            return Ok();
         }
 
         #endregion

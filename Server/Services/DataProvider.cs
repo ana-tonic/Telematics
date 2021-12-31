@@ -16,6 +16,10 @@ namespace Server.Services
         public DataProvider()
         {
             Session = new AstraService().Session;
+            Session.UserDefinedTypes.DefineAsync(
+                UdtMap.For<location>(keyspace: "telematics")
+                .Map(l => l.longitude, "longitude")
+                .Map(l => l.latitude, "latitude")).ConfigureAwait(false);
         }
 
         #region Deliveries
@@ -64,7 +68,19 @@ namespace Server.Services
 
         public RowSet getLocation(Cassandra.TimeUuid delivery_id)
         {
+            //RowSet s = Session.Execute($"SELECT * FROM telematics.location WHERE delivery_id = {delivery_id} ");
+            //foreach (Row row in s)
+            //{
+            //    var a = row[0];
+            //}
+            
             return Session.Execute($"SELECT * FROM telematics.location WHERE delivery_id = {delivery_id} ");
+        }
+
+        public void CreateLocation(Cassandra.TimeUuid delivery_id)
+        {
+            Session.Execute("insert into telematics.location (delivery_id, Reading_Time, distance, location, truck_id)"
+                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, {{longitude : 200.3, latitude : 200.5}}, 25)");
         }
 
         public RowSet getSpeed(Cassandra.TimeUuid delivery_id)
@@ -72,9 +88,21 @@ namespace Server.Services
             return Session.Execute($"SELECT * FROM telematics.speed WHERE delivery_id = {delivery_id} ");
         }
 
+        public void CreateSpeed(Cassandra.TimeUuid delivery_id)
+        {
+            Session.Execute("insert into telematics.speed (delivery_id, Reading_Time, fuel, truck_id, Unit)"
+                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, 100, 'l')");
+        }
+
         public RowSet getIdling(Cassandra.TimeUuid delivery_id)
         {
             return Session.Execute($"SELECT * FROM telematics.idling WHERE delivery_id = {delivery_id} ");
+        }
+
+        public void CreateIdling(Cassandra.TimeUuid delivery_id)
+        {
+            Session.Execute("insert into telematics.idling (delivery_id, Reading_Time, fuel, truck_id, Unit)"
+                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, 100, 'l')");
         }
 
         #endregion
