@@ -204,7 +204,7 @@ export class Start {
             departing.getHours() + ":" + departing.getMinutes();
 
         const row = document.createElement("tr");
-        table.appendChild(row);
+        row.classList.add("hover");
         row.onclick = () => {
             let img = this.container.querySelector("img");
             if (img != null) {
@@ -212,14 +212,19 @@ export class Start {
                 this.drawIMG(document.body);
             }
 
+            const sel = this.container.querySelector(".selected");
+            if (sel != null)
+                sel.classList.remove("selected");
+
             console.log(delivery.delivery_id);
 
             const par = this.rightTable.parentNode;
             par.removeChild(this.rightTable)
             this.drawRightTable(par);
             this.drawRightTableButtons(this.rightTable, delivery.delivery_id);
-
+            row.classList.add("selected");
         };
+        table.appendChild(row);
 
         const cargo = document.createElement("td");
         cargo.innerHTML = delivery.cargo;

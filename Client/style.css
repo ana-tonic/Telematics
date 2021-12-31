@@ -1,5 +1,4 @@
 .container {
-  border: 3px solid black;
   display: flex;
   justify-content: space-between;
 }
@@ -7,7 +6,7 @@
 .leftStart {
   display: flex;
   flex-direction: column;
-  border: 3px solid #ff00c8;
+  border: 1px solid #000000;
   width: 300px;
 }
 
@@ -59,7 +58,6 @@ body {
 .buttonSection {
   display: flex;
   flex-direction: column;
-  border: solid rgb(111, 0, 255) 3px;
 }
 
 .sectionbutton {
@@ -94,4 +92,17 @@ th {
 .buttonsDiv{
   display: flex;
   justify-content: space-around;
+}
+
+.hover:hover{
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.144);
+}
+
+table{
+  margin-left: 5px;
+}
+
+.selected{
+  background-color: rgba(0, 255, 76, 0.144);
 }
