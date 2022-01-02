@@ -62,25 +62,33 @@ namespace Server.Services
 
         public void CreateFuel(Cassandra.TimeUuid delivery_id)
         {
-            Session.Execute("insert into telematics.fuel (delivery_id, Reading_Time, fuel, truck_id, Unit)"
-                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, 100, 'l')");
+            Session.Execute("insert into telematics.fuel (delivery_id, Reading_Time, fuel, Unit)"
+                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, 'l')");
         }
 
-        public RowSet getLocation(Cassandra.TimeUuid delivery_id)
+        public List<Vehicle_location> getLocation(Cassandra.TimeUuid delivery_id)
         {
-            //RowSet s = Session.Execute($"SELECT * FROM telematics.location WHERE delivery_id = {delivery_id} ");
-            //foreach (Row row in s)
-            //{
-            //    var a = row[0];
-            //}
-            
-            return Session.Execute($"SELECT * FROM telematics.location WHERE delivery_id = {delivery_id} ");
+            RowSet rows = Session.Execute($"SELECT * FROM telematics.location WHERE delivery_id = {delivery_id} ");
+            List<Vehicle_location> locations = new List<Vehicle_location>();
+            foreach (Row row in rows)
+            {
+                Vehicle_location l = new Vehicle_location()
+                {
+                    Delivery_Id = row.GetValue<Guid>("delivery_id"),
+                    Distance = row.GetValue<int>("distance"),
+                    Location = row.GetValue<location>("location"),
+                    Reading_time = row.GetValue<DateTimeOffset>("reading_time"),
+                };
+                locations.Add(l);
+            }
+
+            return locations;
         }
 
         public void CreateLocation(Cassandra.TimeUuid delivery_id)
         {
-            Session.Execute("insert into telematics.location (delivery_id, Reading_Time, distance, location, truck_id)"
-                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, {{longitude : 200.3, latitude : 200.5}}, 25)");
+            Session.Execute("insert into telematics.location (delivery_id, Reading_Time, distance, location)"
+                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, {{longitude : 200.3, latitude : 200.5}})");
         }
 
         public RowSet getSpeed(Cassandra.TimeUuid delivery_id)
@@ -90,8 +98,8 @@ namespace Server.Services
 
         public void CreateSpeed(Cassandra.TimeUuid delivery_id)
         {
-            Session.Execute("insert into telematics.speed (delivery_id, Reading_Time, fuel, truck_id, Unit)"
-                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, 100, 'l')");
+            Session.Execute("insert into telematics.speed (delivery_id, Reading_Time, fuel, Unit)"
+                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, 'l')");
         }
 
         public RowSet getIdling(Cassandra.TimeUuid delivery_id)
@@ -101,8 +109,8 @@ namespace Server.Services
 
         public void CreateIdling(Cassandra.TimeUuid delivery_id)
         {
-            Session.Execute("insert into telematics.idling (delivery_id, Reading_Time, fuel, truck_id, Unit)"
-                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, 100, 'l')");
+            Session.Execute("insert into telematics.idling (delivery_id, Reading_Time, fuel, Unit)"
+                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, 'l')");
         }
 
         #endregion

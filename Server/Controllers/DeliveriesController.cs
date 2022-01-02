@@ -73,14 +73,7 @@ namespace Server.Controllers
         [Route("GetLocation/{delivery_id}")]
         public IActionResult GetLocation(string delivery_id)
         {
-            //return new JsonResult(data.getLocation(Guid.Parse(delivery_id)));
-            RowSet rows = data.getLocation(Guid.Parse(delivery_id));
-            foreach (Row row in rows)
-            {
-                var loc = row.GetValue <location>("location");
-                System.Console.WriteLine(loc.latitude.ToString() + " " + loc.longitude.ToString());
-            }
-            return new JsonResult(rows);
+            return new JsonResult(data.getLocation(Guid.Parse(delivery_id)));
         }
 
         [HttpPost]

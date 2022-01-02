@@ -5,6 +5,7 @@ export class Start {
         this.container = null;
         this.middleTable = null;
         this.rightTable = null;
+        this.rightTableContent = null;
     }
 
     draw(host) {
@@ -64,7 +65,13 @@ export class Start {
         buttonFuel.className = "rightButton";
         buttonFuel.innerHTML = "Fuel";
         buttonFuel.onclick = () => {
-            console.log(delivery_id);
+            fetch(`https://localhost:5001/Deliveries/GetFuel/${delivery_id}`).then(p => {
+                p.json().then(data => {
+                    host.removeChild(this.rightTableContent);
+                    this.drawRightTableContent(host, data, h1);
+                });
+
+            });
         }
         buttonsDiv.appendChild(buttonFuel);
 
@@ -72,7 +79,13 @@ export class Start {
         buttonIdling.className = "rightButton";
         buttonIdling.innerHTML = "Idling time";
         buttonIdling.onclick = () => {
-            console.log("Idling");
+            fetch(`https://localhost:5001/Deliveries/GetIdling/${delivery_id}`).then(p => {
+                p.json().then(data => {
+                    host.removeChild(this.rightTableContent);
+                    this.drawRightTableContent(host, data, h2);
+                });
+
+            });
         }
         buttonsDiv.appendChild(buttonIdling);
 
@@ -80,7 +93,13 @@ export class Start {
         buttonSpeed.className = "rightButton";
         buttonSpeed.innerHTML = "Speed";
         buttonSpeed.onclick = () => {
-            console.log("Speed");
+            fetch(`https://localhost:5001/Deliveries/GetSpeed/${delivery_id}`).then(p => {
+                p.json().then(data => {
+                    host.removeChild(this.rightTableContent);
+                    this.drawRightTableContent(host, data, h3);
+                });
+
+            });
         }
         buttonsDiv.appendChild(buttonSpeed);
 
@@ -88,13 +107,25 @@ export class Start {
         buttonLocation.className = "rightButton";
         buttonLocation.innerHTML = "Location";
         buttonLocation.onclick = () => {
-            console.log("FuLocationel");
+            let list = [];
+            fetch(`https://localhost:5001/Deliveries/GetLocation/${delivery_id}`).then(p => {
+                p.json().then(data => {
+
+                    data.forEach(element => {
+                        list.push([0, element.reading_time, element.location.longitude + " " + element.location.latitude, element.truck_Id, element.distance]);
+                    });
+                    console.log(list);
+                    host.removeChild(this.rightTableContent);
+                    this.drawRightTableContent(host, list, h4);
+                });
+            });
         }
+
         buttonsDiv.appendChild(buttonLocation);
 
         fetch(`https://localhost:5001/Deliveries/GetFuel/${delivery_id}`).then(p => {
             p.json().then(data => {
-
+                console.log(data);
                 this.drawRightTableContent(host, data, h1);
             });
 
@@ -106,6 +137,8 @@ export class Start {
         let table = document.createElement("table");
         table.className = "table";
         host.appendChild(table);
+
+        this.rightTableContent = table;
 
 
         const header = document.createElement("tr");
@@ -121,7 +154,6 @@ export class Start {
             const r = document.createElement("tr");
             table.appendChild(r);
 
-            console.log(row);
             const c1 = document.createElement("td");
             c1.innerHTML = row[3];
             r.appendChild(c1);
