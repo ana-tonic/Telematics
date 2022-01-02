@@ -63,7 +63,7 @@ namespace Server.Services
         public void CreateFuel(Cassandra.TimeUuid delivery_id)
         {
             Session.Execute("insert into telematics.fuel (delivery_id, Reading_Time, fuel, Unit)"
-                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, 'l')");
+                + $" values ({delivery_id}, '{DateTimeOffset.Now.ToUnixTimeSeconds()}', 600, 'l')");
         }
 
         public List<Vehicle_location> getLocation(Cassandra.TimeUuid delivery_id)
@@ -88,7 +88,7 @@ namespace Server.Services
         public void CreateLocation(Cassandra.TimeUuid delivery_id)
         {
             Session.Execute("insert into telematics.location (delivery_id, Reading_Time, distance, location)"
-                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, {{longitude : 200.3, latitude : 200.5}})");
+                + $" values ({delivery_id}, '{DateTimeOffset.Now.ToUnixTimeSeconds()}', 600, {{longitude : 200.3, latitude : 200.5}})");
         }
 
         public RowSet getSpeed(Cassandra.TimeUuid delivery_id)
@@ -99,7 +99,7 @@ namespace Server.Services
         public void CreateSpeed(Cassandra.TimeUuid delivery_id)
         {
             Session.Execute("insert into telematics.speed (delivery_id, Reading_Time, fuel, Unit)"
-                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, 'l')");
+                + $" values ({delivery_id}, '{DateTimeOffset.Now.ToUnixTimeSeconds()}', 600, 'l')");
         }
 
         public RowSet getIdling(Cassandra.TimeUuid delivery_id)
@@ -110,7 +110,7 @@ namespace Server.Services
         public void CreateIdling(Cassandra.TimeUuid delivery_id)
         {
             Session.Execute("insert into telematics.idling (delivery_id, Reading_Time, fuel, Unit)"
-                + $" values ({delivery_id}, '2021-12-31T11:06:01.513Z', 600, 'l')");
+                + $" values ({delivery_id}, '{DateTimeOffset.Now.ToUnixTimeSeconds()}', 600, 'l')");
         }
 
         #endregion

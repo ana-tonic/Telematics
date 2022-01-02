@@ -56,10 +56,10 @@ export class Start {
         buttonsDiv.className = "buttonsDiv";
         host.appendChild(buttonsDiv);
 
-        const h1 = ["Truck", "Fuel", "Unit", "Reading time"];
-        const h2 = ["Truck", "Time Idle", "Unit", "Reading time"];
-        const h3 = ["Truck", "Speed", "Unit", "Reading time"];
-        const h4 = ["Truck", "Location", "Distance", "Reading time"];
+        const h1 = ["Fuel", "Unit", "Reading time"];
+        const h2 = ["Time Idle", "Unit", "Reading time"];
+        const h3 = ["Speed", "Unit", "Reading time"];
+        const h4 = ["Location", "Distance", "Reading time"];
 
         const buttonFuel = document.createElement("button");
         buttonFuel.className = "rightButton";
@@ -112,7 +112,7 @@ export class Start {
                 p.json().then(data => {
 
                     data.forEach(element => {
-                        list.push([0, element.reading_time, element.location.longitude + " " + element.location.latitude, element.truck_Id, element.distance]);
+                        list.push([0, element.reading_time, element.location.longitude + " " + element.location.latitude, element.distance]);
                     });
                     console.log(list);
                     host.removeChild(this.rightTableContent);
@@ -153,10 +153,6 @@ export class Start {
         data.forEach(row => {
             const r = document.createElement("tr");
             table.appendChild(r);
-
-            const c1 = document.createElement("td");
-            c1.innerHTML = row[3];
-            r.appendChild(c1);
 
             const c2 = document.createElement("td");
             c2.innerHTML = row[2];

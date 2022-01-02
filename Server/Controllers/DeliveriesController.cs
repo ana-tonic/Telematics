@@ -95,6 +95,14 @@ namespace Server.Controllers
             return new JsonResult(data.getSpeed(delivery_id));
         }
 
+        [HttpPost]
+        [Route("CreateSpeed/{delivery_id}")]
+        public IActionResult CreateSpeed(string delivery_id)
+        {
+            data.CreateSpeed(Guid.Parse(delivery_id));
+            return Ok();
+        }
+
         #endregion
 
         #region idling
@@ -106,6 +114,13 @@ namespace Server.Controllers
             return new JsonResult(data.getIdling(delivery_id));
         }
 
+        [HttpPost]
+        [Route("CreateIdling/{delivery_id}")]
+        public IActionResult CreateIdling(string delivery_id)
+        {
+            data.CreateIdling(Guid.Parse(delivery_id));
+            return Ok();
+        }
         #endregion
 
     }
