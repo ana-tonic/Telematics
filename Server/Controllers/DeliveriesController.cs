@@ -78,7 +78,7 @@ namespace Server.Controllers
             foreach (Row row in rows)
             {
                 var loc = row.GetValue <location>("location");
-                System.Console.WriteLine(loc.latitude.ToString() +" "+ loc.longitude.ToString());
+                System.Console.WriteLine(loc.latitude.ToString() + " " + loc.longitude.ToString());
             }
             return new JsonResult(rows);
         }
