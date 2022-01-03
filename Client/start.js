@@ -6,6 +6,7 @@ export class Start {
         this.middleTable = null;
         this.rightTable = null;
         this.rightTableContent = null;
+        this.selectedDelivery = null;
     }
 
     draw(host) {
@@ -112,9 +113,8 @@ export class Start {
                 p.json().then(data => {
 
                     data.forEach(element => {
-                        list.push([0, element.reading_time, element.location.longitude + " " + element.location.latitude, element.distance]);
+                        list.push([0, element.reading_time, element.location.longitude + "°  " + element.location.latitude + "°", element.distance]);
                     });
-                    console.log(list);
                     host.removeChild(this.rightTableContent);
                     this.drawRightTableContent(host, list, h4);
                 });
@@ -125,7 +125,6 @@ export class Start {
 
         fetch(`https://localhost:5001/Deliveries/GetFuel/${delivery_id}`).then(p => {
             p.json().then(data => {
-                console.log(data);
                 this.drawRightTableContent(host, data, h1);
             });
 
@@ -159,7 +158,7 @@ export class Start {
             r.appendChild(c2);
 
             const c3 = document.createElement("td");
-            c3.innerHTML = row[4];
+            c3.innerHTML = row[3];
             r.appendChild(c3);
 
             const t = new Date(row[1]);
@@ -224,9 +223,12 @@ export class Start {
     drawDeliveryData(table, delivery) {
         const arrival = new Date(delivery.arrival_time);
         const departing = new Date(delivery.departing_time);
-
-        const arrivalFormated = arrival.getDate() + "-" + (arrival.getMonth() + 1) + "-" + arrival.getFullYear() + " " +
-            arrival.getHours() + ":" + arrival.getMinutes();
+        let arrivalFormated;
+        if (delivery.arrival_time != null)
+            arrivalFormated = arrival.getDate() + "-" + (arrival.getMonth() + 1) + "-" + arrival.getFullYear() + " " +
+                arrival.getHours() + ":" + arrival.getMinutes();
+        else
+            arrivalFormated = " ";
 
         const departingFormated = departing.getDate() + "-" + (departing.getMonth() + 1) + "-" + departing.getFullYear() + " " +
             departing.getHours() + ":" + departing.getMinutes();
@@ -244,7 +246,8 @@ export class Start {
             if (sel != null)
                 sel.classList.remove("selected");
 
-            console.log(delivery.delivery_id);
+            this.selectedDelivery = delivery;
+
 
             const par = this.rightTable.parentNode;
             par.removeChild(this.rightTable)
@@ -316,9 +319,26 @@ export class Start {
         startDelivery.className = "startDelivery sectionbutton";
         buttonSection.appendChild(startDelivery);
         startDelivery.onclick = () => {
-            console.log((this.container.querySelectorAll(".DFinput")));
-
-
+            const input = this.container.querySelectorAll(".DFinput");
+            const truck = input[0].value;
+            const driver = input[1].value;
+            const startAddress = input[2].value;
+            const endAddress = input[3].value;
+            const cargo = this.container.querySelector(".startCargo").value;
+            if (truck == "" || driver == "" || startAddress == "" || endAddress == "")
+                alert("Input all values");
+            else
+                fetch(`https://localhost:5001/Deliveries/CreateDelivery`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        Driver: driver,
+                        Start_Address: startAddress,
+                        End_Address: endAddress,
+                        Truck_Id: truck,
+                        Cargo: cargo,
+                    })
+                })
         }
         startDelivery.innerHTML = "Start delivery";
 
@@ -328,6 +348,7 @@ export class Start {
         showDelivery.className = "showDelivery, sectionbutton";
         buttonSection.appendChild(showDelivery);
         showDelivery.onclick = () => {
+            this.selectedDelivery = null;
             const cargo = this.container.querySelector(".cargoSelect").value;
             const year = this.container.querySelector(".year").value;
             fetch(`https://localhost:5001/Deliveries/GetDeliveries/${cargo}&${year}`).then(p => {
@@ -337,21 +358,48 @@ export class Start {
                 this.drawMiddle(parent);
                 this.drawDeliveryHeader(this.middleTable);
 
+                const parent2 = this.rightTable.parentNode;
+                parent2.removeChild(this.rightTable);
+                this.drawRightTable(parent2);
+
                 p.json().then(deliveries => {
 
                     deliveries.forEach(delivery => {
-
-                        const del = new Delivery(delivery[0], delivery[1], delivery[2], delivery[3],
-                            delivery[4], delivery[5], delivery[6], delivery[7], delivery[8], delivery[9]);
+                        const del = new Delivery(delivery[0], delivery[1], delivery[4], delivery[2],
+                            delivery[3], delivery[5], delivery[6], delivery[7], delivery[8], delivery[9]);
 
                         this.drawDeliveryData(this.middleTable, del);
                     });
 
                 });
 
+
             });
         }
         showDelivery.innerHTML = "Show deliveries";
+
+        const DeleteDelivery = document.createElement("button");
+        DeleteDelivery.innerHTML = "Delete selected delivery";
+        DeleteDelivery.className = "showDelivery, sectionbutton";
+        buttonSection.appendChild(DeleteDelivery);
+        DeleteDelivery.onclick = () => {
+            if (this.selectedDelivery != null)
+                fetch(`https://localhost:5001/Deliveries/DeleteDelivery/${this.selectedDelivery.cargo}&
+            ${this.selectedDelivery.year}&${this.selectedDelivery.delivery_id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                }).then(t => {
+                    const sel = this.container.querySelector(".selected");
+                    sel.parentNode.removeChild(sel);
+                    const parent2 = this.rightTable.parentNode;
+                    parent2.removeChild(this.rightTable);
+                    this.drawRightTable(parent2);
+                    this.selectedDelivery = null;
+                })
+        }
+
     }
 
     drawDeliveryForm(host) {
@@ -375,7 +423,7 @@ export class Start {
             "Aluminum",
             "Copper ore"];
         let cargoSelect = document.createElement("select");
-        cargoSelect.className = "select cargoStart";
+        cargoSelect.className = "select cargoStart startCargo";
         const lbl = document.createElement("label");
         lbl.innerHTML = "Cargo: ";
         cri.appendChild(lbl);

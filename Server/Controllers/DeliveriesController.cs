@@ -23,12 +23,7 @@ namespace Server.Controllers
             data = new DataProvider();
         }
 
-        [HttpGet]
-        [Route("GetAllDeliveries")]
-        public IActionResult GetAllDeliveries()
-        {
-            return new JsonResult(data.getAllDeliveries());
-        }
+
 
         [HttpGet]
         [Route("GetDeliveries/{cargo}&{year}")]
@@ -37,12 +32,24 @@ namespace Server.Controllers
             return new JsonResult(data.getDeliveries(cargo, year));
         }
 
+        [HttpDelete]
+        [Route("DeleteDelivery/{cargo}&{year}&{delivery_id}")]
+        public IActionResult GetDeliveries(string cargo, int year, string delivery_id)
+        {
+            data.DeleteDelivery(cargo, year, Guid.Parse(delivery_id));
+            return Ok();
+        }
+
         [HttpPost]
         [Route("CreateDelivery")]
         public IActionResult CreateDelivery([FromBody] Deliveries d)
         {
-
+            d.Delivery_Id = TimeUuid.NewId();
+            d.Active = true;
+            d.Year = DateTime.Now.Year;
+            d.Departing_Time = DateTimeOffset.Now;
             data.CreateDelivery(d);
+            data.StartDelivery(d);
             return Ok();
         }
 
@@ -58,10 +65,10 @@ namespace Server.Controllers
         }
 
         [HttpPost]
-        [Route("CreateFuel/{delivery_id}")]
-        public IActionResult CreateFuel(string delivery_id)
+        [Route("CreateFuel/")]
+        public IActionResult CreateFuel([FromBody]Vehicle_fuel fuel)
         {
-            data.CreateFuel(Guid.Parse(delivery_id));
+            data.CreateFuel(fuel);
             return Ok();
         }
 
@@ -77,10 +84,10 @@ namespace Server.Controllers
         }
 
         [HttpPost]
-        [Route("CreateLocation/{delivery_id}")]
-        public IActionResult CreateLocation(string delivery_id)
+        [Route("CreateLocation/")]
+        public IActionResult CreateLocation([FromBody] Vehicle_location loc)
         {
-            data.CreateLocation(Guid.Parse(delivery_id));
+            data.CreateLocation(loc);
             return Ok();
         }
 
@@ -90,16 +97,16 @@ namespace Server.Controllers
 
         [HttpGet]
         [Route("GetSpeed/{delivery_id}")]
-        public IActionResult GetSpeed(Cassandra.TimeUuid delivery_id)
+        public IActionResult GetSpeed(string delivery_id)
         {
-            return new JsonResult(data.getSpeed(delivery_id));
+            return new JsonResult(data.getSpeed(Guid.Parse(delivery_id)));
         }
 
         [HttpPost]
-        [Route("CreateSpeed/{delivery_id}")]
-        public IActionResult CreateSpeed(string delivery_id)
+        [Route("CreateSpeed/")]
+        public IActionResult CreateSpeed([FromBody] Vehicle_speed speed)
         {
-            data.CreateSpeed(Guid.Parse(delivery_id));
+            data.CreateSpeed(speed);
             return Ok();
         }
 
@@ -109,16 +116,16 @@ namespace Server.Controllers
 
         [HttpGet]
         [Route("GetIdling/{delivery_id}")]
-        public IActionResult GetIdling(Cassandra.TimeUuid delivery_id)
+        public IActionResult GetIdling(string delivery_id)
         {
-            return new JsonResult(data.getIdling(delivery_id));
+            return new JsonResult(data.getIdling(Guid.Parse(delivery_id)));
         }
 
         [HttpPost]
-        [Route("CreateIdling/{delivery_id}")]
-        public IActionResult CreateIdling(string delivery_id)
+        [Route("CreateIdling/")]
+        public IActionResult CreateIdling([FromBody] Vehicle_idling_time idle)
         {
-            data.CreateIdling(Guid.Parse(delivery_id));
+            data.CreateIdling(idle);
             return Ok();
         }
         #endregion
