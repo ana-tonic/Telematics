@@ -1,13 +1,13 @@
 using System;
+using Cassandra;
 
 namespace Server.Models
 {
     public class Vehicle_speed
     {
-        public int Truck_Id;
-        public int Delivery_Id;
-        public int Speed;
-        public DateTimeOffset Reading_time;
-        public string Unit;
+        public Cassandra.TimeUuid Delivery_Id { get; set; }
+        public int Speed { get; set; }
+        public DateTimeOffset Reading_time { get; set; }
+        public string Unit { get; set; }
     }
 }
